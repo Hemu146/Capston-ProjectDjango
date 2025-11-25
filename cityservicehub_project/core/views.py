@@ -1,6 +1,9 @@
 # core/views.py
 
 from django.shortcuts import render
+from .form import UsersForm  # or from .forms import UsersForm (depending on file name)
+from .models import Users
+from django.shortcuts import render, redirect
 
 def home_view(request):
     return render(request, 'home.html')
@@ -8,8 +11,8 @@ def home_view(request):
 def login_view(request):
     return render(request, 'login.html')
 
-def register_view(request):
-    return render(request, 'register.html')
+# def register_view(request):
+#     return render(request, 'register.html')
 
 def forget_view(request):
     return render(request, 'forget.html')
@@ -19,5 +22,14 @@ def service_view(request):
 
 def service_provider_view(request):
     return render(request, 'service_provider.html')
-def name():
-    return "Hello"
+
+def register_view(request):
+    if request.method == "POST":
+        form = UsersForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("home")  # or wherever you want to go after register
+    else:
+        form = UsersForm()
+
+    return render(request, "register.html", {"form": form})

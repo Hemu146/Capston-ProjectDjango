@@ -7,108 +7,100 @@
   <title>Register | City Service Hub</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'css/stylee.css' %}">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
-
-  
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-        <div class="container">
-          <a class="navbar-brand fw-bold text-white" href="#">City Service Hub</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-    
-          <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-            <ul class="navbar-nav align-items-center">
-              <li class="nav-item"><a class="nav-link active" href="{% url 'home' %}">Home</a></li>
-              <li class="nav-item"><a class="nav-link" href="{% url 'services' %}">Services</a></li>
-              <li class="nav-item ms-3">
-                <a href="{% url 'login' %}" class="btn btn-outline-light btn-sm">+ Login</a>          </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold text-white" href="#">City Service Hub</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav align-items-center">
+          <li class="nav-item"><a class="nav-link active" href="{% url 'home' %}">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'services' %}">Services</a></li>
+          <li class="nav-item ms-3">
+            <a href="{% url 'login' %}" class="btn btn-outline-light btn-sm">+ Login</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
   <!-- Background Section -->
   <section class="register-section d-flex align-items-center justify-content-center ">
     <div class="overlay"></div>
     <div class="container position-relative">
-    
+
       <h1 class="text-white mb-3 mt-5 fw-bold text-center">Create Your Account</h1>
       <p class="text-light mb-4 text-center">Join us and start discovering great places near you.</p>
 
       <!-- Registration Form -->
-      <form class="register-form mx-auto p-4 rounded-3">
+      <form class="register-form mx-auto p-4 rounded-3" method="post">
+        {% csrf_token %}
         <div class="row g-3">
-      
-         
-      
+
           <!-- Full Name -->
           <div class="col-md-6">
-            <label for="fullName" class="form-label text-light">Full Name</label>
-            <input type="text" id="fullName" class="form-control" placeholder="Enter your full name" required>
-          </div>
-        
-           <!-- Role Selection -->
-           <div class="col-md-6">
-            <label for="roleSelect" class="form-label text-light">Select Role</label>
-            <select class="form-select" id="roleSelect" required>
-              <option value="">-- Select Role --</option>
-              <option value="user">User</option>
-              <option value="provider">Service Provider</option>
-            </select>
+            <label class="form-label text-light">{{ form.name.label }}</label>
+            {{ form.name }}
+            {{ form.name.errors }}
           </div>
 
-           <!-- Profile Picture Upload -->
-           <div class="col-md-6">
-            <label for="profilePic" class="form-label text-light">Profile Picture</label>
-            <input type="file" id="profilePic" class="form-control" accept="image/*" required>
-          </div>
-      
           <!-- Email -->
           <div class="col-md-6">
-            <label for="email" class="form-label text-light">Email Address</label>
-            <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+            <label class="form-label text-light">{{ form.email.label }}</label>
+            {{ form.email }}
+            {{ form.email.errors }}
           </div>
-      
+
           <!-- Password -->
           <div class="col-md-6">
-            <label for="password" class="form-label text-light">Password</label>
-            <input type="password" id="password" class="form-control" placeholder="Enter password" required>
+            <label class="form-label text-light">{{ form.password.label }}</label>
+            {{ form.password }}
+            {{ form.password.errors }}
           </div>
-      
-          <!-- Confirm Password -->
-          <div class="col-md-6">
-            <label for="confirmPassword" class="form-label text-light">Confirm Password</label>
-            <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm your password" required>
-          </div>
-      
-         
-      
+
           <!-- Phone -->
           <div class="col-md-6">
-            <label for="phone" class="form-label text-light">Phone Number</label>
-            <input type="text" id="phone" class="form-control" placeholder="Enter phone number" required>
+            <label class="form-label text-light">{{ form.phone.label }}</label>
+            {{ form.phone }}
+            {{ form.phone.errors }}
           </div>
-      
+
           <!-- Address -->
           <div class="col-md-6">
-            <label for="address" class="form-label text-light">Address</label>
-            <textarea id="address" class="form-control" rows="1" placeholder="Enter address"></textarea>
+            <label class="form-label text-light">{{ form.adress.label }}</label>
+            {{ form.adress }}
+            {{ form.adress.errors }}
           </div>
+
+          <!-- Status -->
+          <div class="col-md-6">
+            <label class="form-label text-light">{{ form.status.label }}</label>
+            {{ form.status }}
+            {{ form.status.errors }}
+          </div>
+
+          <!-- Reference -->
+          <div class="col-md-6">
+            <label class="form-label text-light">{{ form.reference.label }}</label>
+            {{ form.reference }}
+            {{ form.reference.errors }}
+          </div>
+
         </div>
-      
+
         <!-- Submit Button -->
         <button type="submit" class="btn btn-pink mt-4 w-100">REGISTER</button>
-      
+
         <!-- Login Link -->
         <p class="text-light mt-3 text-center">
-          Already have an account? <a href="{%url 'login'%}" class="text-pink">Login</a>
+          Already have an account? <a href="{% url 'login' %}" class="text-pink">Login</a>
         </p>
       </form>
-      
-      
     </div>
   </section>
 
