@@ -18,3 +18,5 @@ def service_view(request):
 
 def service_provider_view(request):
     return render(request, 'service_provider.html')
+def name():
+    return "Hello"
