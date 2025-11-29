@@ -41,6 +41,11 @@
       <form class="register-form mx-auto p-4 rounded-3" method="post">
         {% csrf_token %}
         <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label text-light">{{ form.photo.label }}</label>
+            {{ form.photo }}
+            {{ form.photo.errors }}
+          </div>
 
           <!-- Full Name -->
           <div class="col-md-6">
@@ -63,6 +68,12 @@
             {{ form.password.errors }}
           </div>
 
+           <div class="col-md-6">
+            <label class="form-label text-light">{{ form.conform.label }}</label>
+            {{ form.conform }}
+            {{ form.conform.errors }}
+          </div>
+
           <!-- Phone -->
           <div class="col-md-6">
             <label class="form-label text-light">{{ form.phone.label }}</label>
@@ -79,17 +90,24 @@
 
           <!-- Status -->
           <div class="col-md-6">
-            <label class="form-label text-light">{{ form.status.label }}</label>
+            {% comment %} <label class="form-label text-light">{{ form.status.label }}</label> {% endcomment %}
+            <label class="form-label text-light">Role</label>
             {{ form.status }}
             {{ form.status.errors }}
           </div>
 
-          <!-- Reference -->
-          <div class="col-md-6">
-            <label class="form-label text-light">{{ form.reference.label }}</label>
-            {{ form.reference }}
-            {{ form.reference.errors }}
-          </div>
+          <!-- Gender -->
+          <div class="col-md-6 mt-3 text-light">
+    <label class="form-label">{{ form.gender.label }}</label>
+
+    {% for radio in form.gender %}
+        <div class="form-check">
+            {{ radio.tag }} {{ radio.choice_label }}
+        </div>
+    {% endfor %}
+
+    {{ form.reference.errors }}
+</div>
 
         </div>
 

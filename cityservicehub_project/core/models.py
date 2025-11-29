@@ -17,6 +17,7 @@ class ServiceProvider(models.Model):
     password=models.CharField(max_length=16,validators=[MinLengthValidator(6,message="Password must be at least 8 characters.")])
     pincode=models.CharField(max_length=6)
     address=models.TextField()
+    
 
 class Services(models.Model):
     id=models.AutoField(primary_key=True)
@@ -29,6 +30,8 @@ class Services(models.Model):
 
 class Users(models.Model):
     id=models.AutoField(primary_key=True)
+    photo = models.ImageField(upload_to="photos/", blank=True, null=False)
+    
     name=models.CharField(max_length=100,null=False)
     email=models.EmailField(unique=True)
     phone=models.CharField(max_length=10,unique=True,validators=[
@@ -42,15 +45,18 @@ class Users(models.Model):
     password=models.CharField(max_length=16,validators=[MinLengthValidator(6,message="Password must be at least 8 characters.")])
     adress=models.TextField()
     STATUS_CHOICES = [
-        ('student', 'Student'),
-        ('working', 'Working'),
-        ('family', 'Family'),
+        ('provider', 'Provider'),
+        ('user', 'USER'),
+        
     ]
     status = models.CharField(max_length=10, choices=STATUS_CHOICES)
-    REFERENCE_CHOICES = [
-        ('poster', 'Poster'),
-        ('social_media', 'Social Media'),
-        ('friends', 'Friends'),
-        ('other', 'Other'),
+    GENDER_CHOICES = [
+        ("male", "Male"),
+        ("female", "Female"),
+        ("other", "Other"),
     ]
-    reference = models.CharField(max_length=20, choices=REFERENCE_CHOICES)
+    gender =  models.CharField(
+        max_length=10,
+        choices=GENDER_CHOICES,
+        default="male"
+    )
